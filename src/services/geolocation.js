@@ -2,15 +2,25 @@ import { errorMessage } from '../utils/messages';
 
 const geolocationService = (locations, searching, callback) => {
   let error = '';
-  const latLng = [];
+  let latLng = [];
   const locationsLength = locations ? locations.length : 0;
-  const getGeoLocations = new Promise(async function(resolve, reject) {
+  const getGeoLocations = new Promise(function(resolve, reject) {
+    if (localStorage.getItem('geolocations')) {
+      const storageLocations = JSON.parse(localStorage.getItem('locations'));
+      const storageGeolocations = JSON.parse(
+        localStorage.getItem('geolocations')
+      );
+      if (JSON.stringify(storageLocations) === JSON.stringify(locations)) {
+        latLng = storageGeolocations;
+        return resolve(latLng);
+      }
+    }
     try {
       if (!locations) {
         error = errorMessage;
-        resolve(error, locations);
+        return resolve(error, locations);
       } else if (locationsLength <= 0) {
-        resolve(locations);
+        return resolve(locations);
       }
       locations.map(async (location, index) => {
         setTimeout(async function() {
@@ -37,17 +47,20 @@ const geolocationService = (locations, searching, callback) => {
             latLng.push(obj);
           }
           if (latLng.length === locations.length || error !== '') {
-            resolve(latLng);
+            return resolve(latLng);
           }
         }, 20 * index);
       });
     } catch (e) {
-      reject(e);
+      return reject(e);
     }
   });
 
   getGeoLocations.then(() => {
-    console.log(latLng.length);
+    if (!localStorage.getItem('geolocations')) {
+      localStorage.setItem('geolocations', JSON.stringify(latLng));
+      localStorage.setItem('locations', JSON.stringify(locations));
+    }
     callback(error, latLng);
   });
 };

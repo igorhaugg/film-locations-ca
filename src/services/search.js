@@ -1,6 +1,6 @@
 import { errorMessage } from '../utils/messages';
 
-const searchService = async (text, check, locations, callback) => {
+const searchService = (text, check, locations, callback) => {
   let error = '';
   const result = [];
   const filters = check.map(item => item.name);
