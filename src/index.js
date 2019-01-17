@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import App from './components/App/App';
 import * as serviceWorker from './serviceWorker';
+import 'isomorphic-fetch';
 
 import './index.css';
 import 'sweetalert/dist/sweetalert.css';
