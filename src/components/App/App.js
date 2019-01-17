@@ -21,15 +21,14 @@ class App extends Component {
     error: ''
   };
   componentDidMount() {
-    // const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json?&$limit=50';
-    const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json';
+    const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json?&$limit=50';
+    // const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json';
     locationService(url, (err, res) => {
       if (err) {
         this.setState({ error: err });
       } else if (res.length === 0) {
         this.setState({ error: err });
       } else {
-        // this.setState({ locations: res });
         this.setState({ locations: res, loading: true });
         this.getGeoLocations(res, false);
       }
@@ -39,12 +38,15 @@ class App extends Component {
     this.setState({ open: !open });
   };
   handleSearch = (text, check, locations) => {
-    this.setState({ error: '', loading: true });
+    if (text.length === 0) {
+      return;
+    }
+    this.setState({ error: '', loading: true, open: false });
     searchService(text, check, locations, (err, res) => {
       if (err) {
-        this.setState({ error: err, loading: false });
+        this.setState({ error: err, loading: false, open: true });
       } else if (res.length === 0) {
-        this.setState({ error: errorMessage, loading: false });
+        this.setState({ error: errorMessage, loading: false, open: true });
       } else {
         this.getGeoLocations(res, true);
       }
@@ -82,14 +84,7 @@ class App extends Component {
           show={error !== ''}
           title="Warning"
           text={error}
-          showCancelButton
           onConfirm={() => {
-            this.setState({ error: '' });
-          }}
-          onCancel={() => {
-            this.setState({ error: '' });
-          }}
-          onClose={() => {
             this.setState({ error: '' });
           }}
         />

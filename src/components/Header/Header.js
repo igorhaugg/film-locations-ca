@@ -22,6 +22,7 @@ const toggle = css`
 const toggle__bars = css`
   background-color: #282c34;
   border-radius: 2px;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
   display: block;
   height: 5px;
   position: relative;
@@ -32,6 +33,7 @@ const toggle__bars = css`
   &::before {
     background-color: #282c34;
     border-radius: 2px;
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
     content: '';
     height: 5px;
     left: 0;
