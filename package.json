@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@emotion/core": "^10.0.6",
     "emotion": "^10.0.6",
     "es6-promise": "^4.2.5",
     "google-maps-react": "^2.0.2",
