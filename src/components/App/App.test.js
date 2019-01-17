@@ -15,24 +15,24 @@ it('expects to render App without crashing', () => {
   ReactDOM.unmountComponentAtNode(div);
 });
 
-it('expects App component always render a div', () => {
+it('expects to render a div', () => {
   const divs = app.find('div');
   expect(divs.length).toBeGreaterThan(0);
 });
 
-it('expects App component always render a `Header` component', () => {
+it('expects to render a `Header` component', () => {
   expect(app.find(Header).length).toBe(1);
 });
 
-it('expects App component always render a `Maps` component', () => {
+it('expects to render a `Maps` component', () => {
   expect(app.find(Maps).length).toBe(1);
 });
 
-it('expects App component to not render a `Sidebar` component initially', () => {
+it('expects to not render a `Sidebar` component initially', () => {
   expect(app.find(Sidebar).length).toBe(0);
 });
 
-it('expects App component to not receive any props', () => {
+it('expects to not receive any props', () => {
   const appComponent = app.find(App);
   expect(Object.keys(appComponent.props()).length).toBe(0);
 });

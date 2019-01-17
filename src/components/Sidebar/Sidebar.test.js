@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Sidebar from './Sidebar';
 import SearchBar from './SearchBar';
@@ -14,38 +14,38 @@ it('expects to render Sidebar without crashing', () => {
 });
 
 it('expects Sidebar to have the same number of checkboxes', () => {
-  const wrapper = mount(<Sidebar />);
-  const checkboxesSearch = wrapper.find({ type: 'checkbox' });
+  const sidebarComponent = mount(<Sidebar />);
+  const checkboxesSearch = sidebarComponent.find({ type: 'checkbox' });
   expect(checkboxesSearch.length).toBe(checkboxes.length);
 });
 
-it('expects Sidebar to have a input text', () => {
-  const wrapper = mount(<Sidebar />);
-  const checkboxesSearch = wrapper.find({ type: 'text' });
+it('expects Sidebar to have an input text', () => {
+  const sidebarComponent = mount(<Sidebar />);
+  const checkboxesSearch = sidebarComponent.find({ type: 'text' });
   expect(checkboxesSearch.length).toBe(1);
 });
 
 it('expects Sidebar to have SearchBar component', () => {
-  const wrapper = mount(<Sidebar />);
-  const searchbar = wrapper.find(SearchBar);
+  const sidebarComponent = mount(<Sidebar />);
+  const searchbar = sidebarComponent.find(SearchBar);
   expect(searchbar.length).toBe(1);
 });
 
 it('expects Sidebar to have SearchBar component with 2 children', () => {
-  const wrapper = mount(<Sidebar />);
-  const children = wrapper.find(SearchBar).children();
+  const sidebarComponent = mount(<Sidebar />);
+  const children = sidebarComponent.find(SearchBar).children();
   expect(children.length).toBe(2);
 });
 
 it('expects Sidebar to have a title', () => {
-  const wrapper = mount(<Sidebar />);
-  const title = wrapper.find('h3');
+  const sidebarComponent = mount(<Sidebar />);
+  const title = sidebarComponent.find('h3');
   expect(title.type()).toBe('h3');
 });
 
 it('expects Sidebar to not be open when sending `false`', () => {
-  const wrapper = mount(<Sidebar open={false} />);
-  const classes = wrapper
+  const sidebarComponent = mount(<Sidebar open={false} />);
+  const classes = sidebarComponent
     .find('aside')
     .props()
     .className.split(' ');
@@ -53,8 +53,8 @@ it('expects Sidebar to not be open when sending `false`', () => {
 });
 
 it('expects Sidebar to be open when sending `true`', () => {
-  const wrapper = mount(<Sidebar open={true} />);
-  const classes = wrapper
+  const sidebarComponent = mount(<Sidebar open={true} />);
+  const classes = sidebarComponent
     .find('aside')
     .props()
     .className.split(' ');

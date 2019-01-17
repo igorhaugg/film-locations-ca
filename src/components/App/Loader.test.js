@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { shallow, mount } from 'enzyme';
+import { mount } from 'enzyme';
 
 import Loader from './Loader';
 
@@ -11,7 +11,7 @@ it('expects to render Loader without crashing', () => {
 });
 
 it('expects Loader to have 2 span', () => {
-  const wrapper = mount(<Loader />);
-  const spanSearch = wrapper.find('span');
+  const loader = mount(<Loader />);
+  const spanSearch = loader.find('span');
   expect(spanSearch.length).toBe(2);
 });

@@ -4,7 +4,7 @@ import { errorMessage } from '../utils/messages';
 const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json?&$limit=100';
 const wrongUrl = 'https://data.sfgov.org/resource/wwmu-gmz';
 
-test('expects to not receive error', done => {
+test('expects to not receive an error', done => {
   locationService(url, (error, locations) => {
     expect(error).toBe('');
     done();

@@ -65,7 +65,7 @@ test('expects error message', done => {
   });
 });
 
-test('expects to not receive error message', done => {
+test('expects to not receive an error message', done => {
   searchService(goodSearch, check, locations, (error, result) => {
     expect(error).toBe('');
     done();
@@ -87,14 +87,14 @@ test('expects to receive locations searched properly when sending 2 locations', 
   });
 });
 
-test('expects to not receive error message when sending multiple checkboxes', done => {
+test('expects to not receive an error message when sending multiple checkboxes', done => {
   searchService(goodSearch2, check2, locations, (error, result) => {
     expect(error).toBe('');
     done();
   });
 });
 
-test('expects to receive error message when sending empty location', done => {
+test('expects to receive an error message when sending empty location', done => {
   searchService(goodSearch, check, [], (error, result) => {
     expect(error).toBe(errorMessage);
     expect(result).toEqual([]);
@@ -102,7 +102,7 @@ test('expects to receive error message when sending empty location', done => {
   });
 });
 
-test('expects to receive error message when sending null location', done => {
+test('expects to receive an error message when sending null location', done => {
   searchService(goodSearch, check, null, (error, result) => {
     expect(error).toBe(errorMessage);
     expect(result).toEqual([]);

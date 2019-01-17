@@ -1,24 +1,30 @@
-import { errorMessage } from '../utils/messages';
+import { errorMessage, warningMessage } from '../utils/messages';
 
-const geolocationService = (locations, callback) => {
+const geolocationService = (locations, searching, callback) => {
   let error = '';
+  let locationsArr = [];
   const latLng = [];
+  const locationsLength = locations ? locations.length : 0;
   const getGeoLocations = new Promise(function(resolve, reject) {
     try {
       if (!locations) {
         error = errorMessage;
         resolve(error, locations);
-      } else if (locations.length <= 0) {
+      } else if (locationsLength <= 0) {
         resolve(locations);
+      } else if (locationsLength > 50) {
+        locationsArr = locations.sort(() => 0.5 - Math.random()).slice(0, 50);
+        error = searching ? warningMessage(locations.length) : '';
+      } else {
+        locationsArr = locations;
       }
-      locations.map(async location => {
+      locationsArr.map(async (location, index) => {
         const address = encodeURIComponent(
           location.locations + ' San Francisco, CA'
         );
         const url = `https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyA-rrBafnyOsJF7AVrW8qcM7Vu8d96e_4k`;
         const response = await fetch(url);
         const data = await response.json();
-        // console.log(data);
         if (data.error_message) {
           error = data.error_message;
         } else {
@@ -29,8 +35,7 @@ const geolocationService = (locations, callback) => {
           };
           latLng.push(obj);
         }
-        // if (latLng.length === 5 || error !== '') {
-        if (latLng.length === locations.length || error !== '') {
+        if (latLng.length === locationsArr.length || error !== '') {
           resolve(latLng);
         }
       });

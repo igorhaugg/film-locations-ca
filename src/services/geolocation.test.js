@@ -28,21 +28,21 @@ const locations = [
 ];
 
 test('expects to receive geolocations properly', done => {
-  geolocationService(locations, (error, latLng) => {
+  geolocationService(locations, false, (error, latLng) => {
     expect(latLng.length).toBe(locations.length);
     done();
   });
 });
 
-test('expects to receive geolocations properly', done => {
-  geolocationService([], (error, latLng) => {
+test('expects to not receive geolocations when sending an empty array', done => {
+  geolocationService([], false, (error, latLng) => {
     expect(latLng.length).toBe(0);
     done();
   });
 });
 
-test('expects to receive error', done => {
-  geolocationService(null, (error, latLng) => {
+test('expects to receive an error when sending a null array', done => {
+  geolocationService(null, false, (error, latLng) => {
     expect(error).toBe(errorMessage);
     done();
   });

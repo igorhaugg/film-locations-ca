@@ -21,16 +21,17 @@ class App extends Component {
     error: ''
   };
   componentDidMount() {
-    const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json?&$limit=10';
+    // const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json?&$limit=50';
+    const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json';
     locationService(url, (err, res) => {
       if (err) {
         this.setState({ error: err });
       } else if (res.length === 0) {
         this.setState({ error: err });
       } else {
-        this.setState({ locations: res });
-        // this.setState({ locations: res, loading: true });
-        // this.getGeoLocations(res);
+        // this.setState({ locations: res });
+        this.setState({ locations: res, loading: true });
+        this.getGeoLocations(res, false);
       }
     });
   }
@@ -45,14 +46,14 @@ class App extends Component {
       } else if (res.length === 0) {
         this.setState({ error: errorMessage, loading: false });
       } else {
-        this.getGeoLocations(res);
+        this.getGeoLocations(res, true);
       }
     });
   };
-  getGeoLocations = locations => {
-    geolocationService(locations, (err, res) => {
+  getGeoLocations = (locations, searching) => {
+    geolocationService(locations, searching, (err, res) => {
       if (err) {
-        this.setState({ error: err, loading: false });
+        this.setState({ error: err, finalLocations: res, loading: false });
       } else if (res.length === 0) {
         this.setState({ error: errorMessage, loading: false });
       } else {
@@ -62,7 +63,7 @@ class App extends Component {
   };
   render() {
     const { open, finalLocations, locations, error, loading } = this.state;
-    console.log(this.state);
+    // console.log(this.state);
     return (
       <Fragment>
         <Header open={open} onClick={isOpen => this.handleToggle(isOpen)} />

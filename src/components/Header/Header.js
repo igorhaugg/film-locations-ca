@@ -14,6 +14,7 @@ const toggle = css`
   height: 3rem;
   margin-left: 1.4rem;
   padding-top: 2.8rem;
+  position: relative;
   width: 3rem;
   z-index: 20;
 `;
