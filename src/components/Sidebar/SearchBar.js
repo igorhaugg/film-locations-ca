@@ -10,6 +10,7 @@ const SearchBar = ({ handleChangeInput, search, check, onClick }) => (
     <div className={searchbar__search}>
       <input
         type="text"
+        className={searchbar__input}
         onChange={handleChangeInput}
         onKeyPress={e => {
           if (e.key === 'Enter') {
@@ -48,6 +49,14 @@ const searchbar__info = css`
   font-size: 1.4rem;
   font-weight: 100;
   margin-top: 1.5rem;
+`;
+
+const searchbar__input = css`
+  border: 1px solid rgba(0, 0, 0, 0.5);
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  outline: none;
+  width: 85%;
 `;
 
 export default SearchBar;

@@ -31,6 +31,7 @@ class Sidebar extends Component {
             <input
               id={item.name}
               type="checkbox"
+              className={sidebar__checkbox}
               value={item.name}
               onChange={() =>
                 this.handleChangeCheckbox(item, index, this.state)
@@ -78,6 +79,33 @@ const sidebar__title = css`
   font-weight: 100;
   margin-top: 2.5rem;
   text-align: center;
+`;
+
+const sidebar__checkbox = css`
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  + label::before {
+    border: 1px solid;
+    border-radius: 0.1rem;
+    content: '';
+    cursor: pointer;
+    display: inline-block;
+    height: 2rem;
+    line-height: 1;
+    margin-bottom: 0.1rem;
+    margin-right: 0.5rem;
+    padding: 0.3rem;
+    text-align: center;
+    vertical-align: middle;
+    width: 2rem;
+  }
+  &:checked + label::before {
+    content: '✔';
+  }
+  + label {
+    cursor: pointer;
+  }
 `;
 
 export default Sidebar;
