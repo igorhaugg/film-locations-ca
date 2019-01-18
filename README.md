@@ -7,7 +7,8 @@ The data was consulted at [DataSF:Film Locations](https://data.sfgov.org/Culture
 The application doesn't support internet explorer versions previous than 11.
 
 It's necessary to create a `.env` file in the root folder, with the google api key:
-REACT_APP_GOOGLE_MAPS_KEY=<YOUR-GOOGLE-API-KEY>
+
+REACT_APP_GOOGLE_MAPS_KEY=YOUR-GOOGLE-API-KEY
 
 ## Packages Installed
 
