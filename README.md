@@ -10,6 +10,8 @@ It's necessary to create a `.env` file in the root folder, with the google api k
 
 REACT_APP_GOOGLE_MAPS_KEY=YOUR-GOOGLE-API-KEY
 
+Please, use an API key that has enable billing. The film locations API returns 1000 values and the free plan doesn't allow that many requests.
+
 ## Packages Installed
 
 ### `emotion`
