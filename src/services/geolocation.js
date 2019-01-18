@@ -79,9 +79,12 @@ const geolocationService = (locations, searching, callback) => {
           // latLng has the same length of the locations, this means
           // all locations were executed
           if (latLng.length === locations.length || error !== '') {
+            if (latLng.length === locations.length) {
+              error = '';
+            }
             return resolve(latLng);
           }
-        }, 50 * index); // 50 * index is the time waited for setTimeout
+        }, 100 * index); // 100 * index is the time waited for setTimeout
       });
     } catch (e) {
       return reject(e);
@@ -89,11 +92,16 @@ const geolocationService = (locations, searching, callback) => {
   });
 
   // when the Promise is resolved it consults if there is a geolocation
-  // variable in localStorage, if there isn't, creates one to save the
-  // information, if the geolocations exist in localStorage, it will just
-  // return the callback
+  // variable in localStorage, then, verifies if it is bigger than the one searched,
+  // if it is bigger, replace the variable
   getGeoLocations.then(() => {
-    if (!localStorage.getItem('geolocations')) {
+    const geolocaionsLocalStorage = JSON.parse(
+      localStorage.getItem('geolocations')
+    );
+    if (
+      geolocaionsLocalStorage &&
+      latLng.length > geolocaionsLocalStorage.length
+    ) {
       localStorage.setItem('geolocations', JSON.stringify(latLng));
       localStorage.setItem('locations', JSON.stringify(locations));
     }

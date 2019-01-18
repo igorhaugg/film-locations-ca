@@ -7,6 +7,9 @@ const Loader = () => (
     <span className={loader__box}>
       <span className={loader__inner} />
     </span>
+    <small className={loader__message}>
+      Fetching data. It might take a minute.
+    </small>
   </div>
 );
 
@@ -58,6 +61,7 @@ const loader = css`
   align-items: center;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
+  flex-direction: column;
   height: 100%;
   justify-content: center;
   position: absolute;
@@ -80,6 +84,12 @@ const loader__inner = css`
   display: inline-block;
   vertical-align: top;
   width: 100%;
+`;
+
+const loader__message = css`
+  color: white;
+  font-size: 2rem;
+  padding-top: 2rem;
 `;
 
 export default Loader;
