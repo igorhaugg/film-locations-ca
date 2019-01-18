@@ -21,8 +21,11 @@ class App extends Component {
     error: ''
   };
   componentDidMount() {
-    const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json?&$limit=50';
-    // const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json';
+    // URL to fetch locations
+    const url = 'https://data.sfgov.org/resource/wwmu-gmzc.json';
+    // calls locationService sending the URL
+    // any error or empty response will make the sweetalert to be shown
+    // if the return is ok shows the loading component and call getGeoLocations service
     locationService(url, (err, res) => {
       if (err) {
         this.setState({ error: err });
@@ -38,10 +41,18 @@ class App extends Component {
     this.setState({ open: !open });
   };
   handleSearch = (text, check, locations) => {
+    // do not allow users to do empty searches
     if (text.length === 0) {
       return;
     }
+    // starts by cleaning errors, closing the Sidebar and showing the Loader
     this.setState({ error: '', loading: true, open: false });
+    // calls searchService sending: text, check, locations and callback function
+    // text = input value
+    // check = which checkboxes were checked
+    // locations = value received in locationService
+    // any error or empty response will make the sweetalert to be shown
+    // if the return are ok, shows loading component and call getGeoLocations service
     searchService(text, check, locations, (err, res) => {
       if (err) {
         this.setState({ error: err, loading: false, open: true });
@@ -53,6 +64,11 @@ class App extends Component {
     });
   };
   getGeoLocations = (locations, searching) => {
+    // calls geolocationService and send: locations, searching and a callback function
+    // locations = value received in locationService
+    // searching = boolean that defines if it is searching or not
+    // any error or empty response will make the sweetalert to be shown
+    // if the return is ok, set results to the state
     geolocationService(locations, searching, (err, res) => {
       if (err) {
         this.setState({ error: err, finalLocations: res, loading: false });
@@ -65,7 +81,6 @@ class App extends Component {
   };
   render() {
     const { open, finalLocations, locations, error, loading } = this.state;
-    // console.log(this.state);
     return (
       <Fragment>
         <Header open={open} onClick={isOpen => this.handleToggle(isOpen)} />

@@ -14,6 +14,8 @@ class Sidebar extends Component {
     this.setState({ search: e.target.value });
   };
   handleChangeCheckbox = (item, index, state) => {
+    // this function updates checkboxes to inform if it is checked or not
+    // it makes a copy of the state, updates the copy and set the new state
     const currentState = { ...state };
     const checkboxes = [...currentState.checkboxes];
     checkboxes[index].checked = !checkboxes[index].checked;
@@ -23,8 +25,12 @@ class Sidebar extends Component {
     const { open, onClick } = this.props;
     const { search, checkboxes } = this.state;
     const check = checkboxes.filter(item => item.checked);
+    // receives open and onClick function as props
+    // open = indicates if the Sidebar is open
+    // onClick = it is passed to SearchBar component to handle Search clicks
+    // the check variable gets only the checkboxes that were checked
     return (
-      <aside className={open ? `${sidebar} ${sidebar__on}` : sidebar}>
+      <aside className={open ? `${sidebar} ${sidebar__open}` : sidebar}>
         <h3 className={sidebar__title}>Film locations in San Francisco</h3>
         {checkboxes.map((item, index) => (
           <div key={item.name}>
@@ -70,7 +76,7 @@ const sidebar = css`
   }
 `;
 
-const sidebar__on = css`
+const sidebar__open = css`
   transform: translateX(0);
 `;
 
